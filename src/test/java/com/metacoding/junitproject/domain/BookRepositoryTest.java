@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
 @DataJpaTest
 public class BookRepositoryTest {
@@ -51,6 +52,7 @@ public class BookRepositoryTest {
         assertEquals("메타코딩", books.get(0).getAuthor());
     }
 
+    @Sql("classpath:db/tableInit.sql")
     @Test
     void 책한건보기_test() {
         String title = "junit5";
@@ -62,6 +64,7 @@ public class BookRepositoryTest {
         assertEquals(author, bookPS.getAuthor());
     }
 
+    @Sql("classpath:db/tableInit.sql")
     @Test
     void 책삭제_test() {
         Long id = 1L;
