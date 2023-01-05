@@ -1,8 +1,11 @@
 package com.metacoding.junitproject.web.dto;
 
 import com.metacoding.junitproject.domain.Book;
+
+import lombok.Getter;
 import lombok.Setter;
 
+@Getter
 @Setter
 public class BookSaveReqDto {
     private String title;
