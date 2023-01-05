@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.metacoding.junitproject.domain.Book;
 import com.metacoding.junitproject.domain.BookRepository;
+import com.metacoding.junitproject.util.MailSender;
 import com.metacoding.junitproject.web.dto.BookRespDto;
 import com.metacoding.junitproject.web.dto.BookSaveReqDto;
 
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final MailSender mailSender;
 
     @Transactional(rollbackFor = RuntimeException.class)
     public BookRespDto 책등록하기(BookSaveReqDto dto) {
