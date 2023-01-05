@@ -1,6 +1,7 @@
 package com.metacoding.junitproject.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -29,6 +30,16 @@ public class BookService {
         return bookRepository.findAll().stream()
                 .map(new BookRespDto()::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public BookRespDto 책한건보기(Long id) {
+        Optional<Book> bookOP = bookRepository.findById(id);
+        if (bookOP.isPresent()) { // 찾았다면
+            Book bookPS = bookOP.get();
+            return bookPS.toDto();
+        } else {
+            throw new RuntimeException("해당 아이디를 찾을 수 없습니다.");
+        }
     }
 
 }

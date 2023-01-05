@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.metacoding.junitproject.web.dto.BookRespDto;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,5 +34,11 @@ public class Book {
         this.author = author;
     }
 
-
+    public BookRespDto toDto() {
+        return BookRespDto.builder()
+                .id(id)
+                .title(title)
+                .author(author)
+                .build();
+    }
 }
