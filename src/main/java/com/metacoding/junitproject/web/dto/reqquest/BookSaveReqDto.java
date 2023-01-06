@@ -1,4 +1,4 @@
-package com.metacoding.junitproject.web.dto;
+package com.metacoding.junitproject.web.dto.reqquest;
 
 import com.metacoding.junitproject.domain.Book;
 
