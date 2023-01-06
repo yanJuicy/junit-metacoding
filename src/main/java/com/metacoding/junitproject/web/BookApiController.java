@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metacoding.junitproject.service.BookService;
-import com.metacoding.junitproject.web.dto.reqquest.BookSaveReqDto;
+import com.metacoding.junitproject.web.dto.request.BookSaveReqDto;
 import com.metacoding.junitproject.web.dto.response.BookRespDto;
 
 import lombok.RequiredArgsConstructor;

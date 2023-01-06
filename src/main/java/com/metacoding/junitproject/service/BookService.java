@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.metacoding.junitproject.domain.Book;
 import com.metacoding.junitproject.domain.BookRepository;
 import com.metacoding.junitproject.util.MailSender;
-import com.metacoding.junitproject.web.dto.reqquest.BookSaveReqDto;
+import com.metacoding.junitproject.web.dto.request.BookSaveReqDto;
 import com.metacoding.junitproject.web.dto.response.BookRespDto;
 
 import lombok.RequiredArgsConstructor;
