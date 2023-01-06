@@ -1,8 +1,10 @@
 package com.metacoding.junitproject.web;
 
+import com.metacoding.junitproject.web.dto.response.CMRespDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,9 @@ import com.metacoding.junitproject.web.dto.response.BookRespDto;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RequiredArgsConstructor
 @RestController
 public class BookApiController {
@@ -25,8 +30,22 @@ public class BookApiController {
 
     @PostMapping("/api/v1/book")
     public ResponseEntity<?> saveBook(@RequestBody BookSaveReqDto bookSaveReqDto, BindingResult bindingResult) {
+        // AOP 처리하는 게 좋음!!
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errorMap = new HashMap<>();
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                errorMap.put(fe.getField(), fe.getDefaultMessage());
+            }
+            System.out.println("=================================");
+            System.out.println(errorMap.toString());
+            System.out.println("=================================");
+
+            throw new RuntimeException(errorMap.toString());
+        }
+
         BookRespDto bookRespDto = bookService.책등록하기(bookSaveReqDto);
-        return new ResponseEntity<>(bookRespDto, HttpStatus.CREATED); // 201 = insert
+        return new ResponseEntity<>(CMRespDto.builder().code(1).msg("글 저장 성공").body(bookRespDto).build(),
+                HttpStatus.CREATED); // 201 = insert
     }
 
     public ResponseEntity<?> getBookList() {
