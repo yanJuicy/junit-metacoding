@@ -81,32 +81,27 @@ public class BookRepositoryTest {
         Long id = 1L;
         String title = "junit";
         String author = "데어코딩";
-        Book book = new Book(id, title, author);
+        Book updatebook = new Book(id, "junit", "데어코딩");
 
-        // when
-        // bookRepository.findAll().stream()
-        // .forEach((b) -> {
-        //     System.out.println("1.==============");
-        //     System.out.println(b.getId());
-        //     System.out.println(b.getTitle());
-        //     System.out.println(b.getAuthor());
-        // });
+        // update
+        Book bookPS = bookRepository.save(updatebook);
 
-        Book bookPS = bookRepository.save(book);
+        // update 쿼리 x
+        bookRepository.findById(bookPS.getId());
 
+        // update 쿼리 후 select
         bookRepository.findAll()
-        .stream()
-        .forEach((b) -> {
-            System.out.println("2.==============");
-            System.out.println(b.getId());
-            System.out.println(b.getTitle());
-            System.out.println(b.getAuthor());
-        });
+                .stream()
+                .forEach((b) -> {
+                    System.out.println("2.==============");
+                    System.out.println(b.getId());
+                    System.out.println(b.getTitle());
+                    System.out.println(b.getAuthor());
+                });
 
         // then
         assertEquals(id, bookPS.getId());
         assertEquals(title, bookPS.getTitle());
         assertEquals(author, bookPS.getAuthor());
     }
-
 }
