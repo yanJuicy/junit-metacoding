@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.metacoding.junitproject.web.dto.response.BookListRespDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -71,13 +72,13 @@ public class BookServiceTest {
         when(bookRepository.findAll()).thenReturn(books);
 
         // when
-        List<BookRespDto> bookListRespDto = bookService.책목록보기();
+        BookListRespDto bookListRespDto = bookService.책목록보기();
 
         // then
-        assertThat(bookListRespDto.get(0).getTitle()).isEqualTo("junit강의");
-        assertThat(bookListRespDto.get(0).getAuthor()).isEqualTo("메타코딩");
-        assertThat(bookListRespDto.get(1).getTitle()).isEqualTo("spring강의");
-        assertThat(bookListRespDto.get(1).getAuthor()).isEqualTo("겟인데어");
+        assertThat(bookListRespDto.getItems().get(0).getTitle()).isEqualTo("junit강의");
+        assertThat(bookListRespDto.getItems().get(0).getAuthor()).isEqualTo("메타코딩");
+        assertThat(bookListRespDto.getItems().get(1).getTitle()).isEqualTo("spring강의");
+        assertThat(bookListRespDto.getItems().get(1).getAuthor()).isEqualTo("겟인데어");
     }
 
     @Test

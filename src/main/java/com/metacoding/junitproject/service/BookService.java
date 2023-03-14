@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.metacoding.junitproject.web.dto.response.BookListRespDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,10 +29,13 @@ public class BookService {
         return new BookRespDto().toDto(bookPS);
     }
 
-    public List<BookRespDto> 책목록보기() {
-        return bookRepository.findAll().stream()
+    public BookListRespDto 책목록보기() {
+        List<BookRespDto> dtos = bookRepository.findAll().stream()
                 .map(new BookRespDto()::toDto)
                 .collect(Collectors.toList());
+
+        BookListRespDto bookListRespDto = BookListRespDto.builder().items(dtos).build();
+        return bookListRespDto;
     }
 
     public BookRespDto 책한건보기(Long id) {

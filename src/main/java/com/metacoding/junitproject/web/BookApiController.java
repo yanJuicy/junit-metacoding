@@ -1,5 +1,6 @@
 package com.metacoding.junitproject.web;
 
+import com.metacoding.junitproject.web.dto.response.BookListRespDto;
 import com.metacoding.junitproject.web.dto.response.CMRespDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,8 +49,11 @@ public class BookApiController {
                 HttpStatus.CREATED); // 201 = insert
     }
 
+    @GetMapping("/api/v1/book")
     public ResponseEntity<?> getBookList() {
-        return null;
+        BookListRespDto bookListRespDto = bookService.책목록보기();
+        return new ResponseEntity<>(CMRespDto.builder().code(1).msg("글 목록보기 성공").body(bookListRespDto).build(),
+                HttpStatus.OK); // 200 = ok
     }
 
     // 3. 책한건보기
